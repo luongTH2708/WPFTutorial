@@ -19,6 +19,7 @@ namespace WPFTutorial.Command
 
         public override void Execute(object parameter)
         {
+            _navigationService.Navigate();
         }
     }
 }

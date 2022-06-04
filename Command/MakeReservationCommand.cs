@@ -18,7 +18,7 @@ namespace WPFTutorial.Command
         private readonly Hotel _hotel;
         private readonly NavigationService _reservationViewReservationService;
 
-        public MakeReservationCommand(MakeReservationViewModel makeReservationViewModel, 
+        public MakeReservationCommand(MakeReservationViewModel makeReservationViewModel,
             Hotel hotel,
             NavigationService reservationViewReservationService
             )
@@ -30,9 +30,10 @@ namespace WPFTutorial.Command
         }
         public override bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(_makeReservationViewModel.Username) && 
+            return !string.IsNullOrEmpty(
+                _makeReservationViewModel.Username) &&
                 _makeReservationViewModel.RoomNumber > 0 &&
-                _makeReservationViewModel.FloorNumber >0 &&
+                _makeReservationViewModel.FloorNumber > 0 &&
                 base.CanExecute(parameter);
         }
         public override void Execute(object parameter)
@@ -55,12 +56,17 @@ namespace WPFTutorial.Command
             {
                 MessageBox.Show("This room is already taken.", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+
+                //_reservationViewReservationService.Navigate();
+
             }
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(MakeReservationViewModel.Username))
+            if (e.PropertyName == nameof(MakeReservationViewModel.Username) ||
+                e.PropertyName == nameof(MakeReservationViewModel.FloorNumber) ||
+                e.PropertyName == nameof(MakeReservationViewModel.RoomNumber))
             {
                 OnCanExcuteChanged();
             }

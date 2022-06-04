@@ -31,7 +31,6 @@ namespace WPFTutorial.Model
                 }
             }
             _reservations.Add(reservation);
-
         }
     }
 }

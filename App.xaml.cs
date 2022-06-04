@@ -43,7 +43,7 @@ namespace WPFTutorial
         }
         private ReservationListingViewModel createReservationViewModel()
         {
-            return new ReservationListingViewModel(new NavigationService(_navigationStore, createMakeReservationViewModel));
+            return new ReservationListingViewModel(_hotel, new NavigationService(_navigationStore, createMakeReservationViewModel));
         }
     }
 }

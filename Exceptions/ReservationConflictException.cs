@@ -33,7 +33,5 @@ namespace WPFTutorial.Exceptions
         protected ReservationConflictException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
-
-
     }
 }
