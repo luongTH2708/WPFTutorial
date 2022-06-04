@@ -5,32 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFTutorial.Exceptions;
+using WPFTutorial.Services.ReservationConflictValidator;
+using WPFTutorial.Services.ReservationCreators;
+using WPFTutorial.Services.ReservationProviders;
 
 namespace WPFTutorial.Model
 {
     public class ReservationBook
     {
-        private readonly List<Reservation> _reservations;
+        private readonly IReservationProvider _reservationProvider;
+        private readonly IReservationCreator _reservationCreater;
+        private readonly IReservationConflictValidator _reservationConflictValidator;
 
-        public ReservationBook()
+        public ReservationBook(
+            IReservationProvider resrvationProvider, 
+            IReservationCreator resrvationCreater, 
+            IReservationConflictValidator reservationConflictValidator = null)
         {
-            _reservations = new List<Reservation>();
-             
+            _reservationProvider = resrvationProvider;
+            _reservationCreater = resrvationCreater;
+            _reservationConflictValidator = reservationConflictValidator;
         }
-        public IEnumerable<Reservation> GetAllReservation()
+
+        public async Task<IEnumerable<Reservation>> GetAllReservation()
         {
-            return _reservations;
+            return await _reservationProvider.GetAllReservations();
         }
-        public void AddReservation(Reservation reservation)
+        public async Task AddReservation(Reservation reservation)
         {
-            foreach (Reservation existingReservations in _reservations)
+            Reservation conflictingReservation =
+                await _reservationConflictValidator
+                .GetConflictingReservation(reservation);
+            if (conflictingReservation != null)
             {
-                if (existingReservations.Conflicts(reservation))
-                {
-                    throw new ReservationConflictException(existingReservations,reservation);
-                }
+                throw new ReservationConflictException(
+                    conflictingReservation,
+                    reservation);
             }
-            _reservations.Add(reservation);
+            await _reservationCreater.CreateReservation(reservation);
         }
     }
 }

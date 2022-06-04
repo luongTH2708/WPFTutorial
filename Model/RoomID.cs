@@ -9,7 +9,7 @@ namespace WPFTutorial.Model
     public class RoomID
     {
         public int FloorNumber { get; }
-        public int RoomNumber { get; }  
+        public int RoomNumber { get; }
         public RoomID(int floorNumber, int roomNumber)
         {
             FloorNumber = floorNumber;

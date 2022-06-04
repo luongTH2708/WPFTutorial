@@ -30,7 +30,7 @@
         </Grid>
 
         <ListView Grid.Row="1" 
-                  ItemsSource="{Binding reservations}"
+                  ItemsSource="{Binding Reservations}"
                   Margin="0 25 0 0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

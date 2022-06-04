@@ -11,21 +11,21 @@ namespace WPFTutorial.Model
         readonly ReservationBook _reservationBook;
         public string Name { get; }
 
-        public Hotel(string name)
+        public Hotel(string name, ReservationBook reservationBook)
         {
             Name = name;
-            _reservationBook = new ReservationBook();
+            _reservationBook = reservationBook;
         }
         /// <summary>
         /// </summary>
-        /// <returns>Sll reservation.</returns>
-        public IEnumerable<Reservation> GetAllReservation()
+        /// <returns>All reservation.</returns>
+        public async Task<IEnumerable<Reservation>> GetAllReservation()
         {
-            return _reservationBook.GetAllReservation();
+            return await _reservationBook.GetAllReservation();
         }
-        public void MakeResevation(Reservation reservation)
+        public async Task MakeResevation(Reservation reservation)
         {
-            _reservationBook.AddReservation(reservation);
+            await _reservationBook.AddReservation(reservation);
         }
     }
 }

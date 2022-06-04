@@ -14,22 +14,31 @@ namespace WPFTutorial.ViewModels
 {
     public class ReservationListingViewModel : ViewModelBase
     {
-        private readonly Hotel _hotel;
         private readonly ObservableCollection<ReservationViewModel> _reservations;
-        public IEnumerable<ReservationViewModel> reservations => _reservations;
+        public IEnumerable<ReservationViewModel> Reservations => _reservations;
+        public ICommand LoadReservationCommand { get; }
         public ICommand MakeReservationCommand { get; }
-        public ReservationListingViewModel(Hotel hotel, NavigationService makeReservationNavigationService)
+        public ReservationListingViewModel(
+            Hotel hotel, 
+            NavigationService makeReservationNavigationService)
         {
-            _hotel = hotel;
             _reservations = new ObservableCollection<ReservationViewModel>();
+            LoadReservationCommand = new LoadReservationCommand(this,hotel);
             MakeReservationCommand = new NavigateCommand(makeReservationNavigationService);
-            UpdateReservation();
         }
-
-        private void UpdateReservation()
+        public static ReservationListingViewModel LoadViewModel(
+            Hotel hotel, 
+            NavigationService makeReservationNavigationService)
+        {
+            ReservationListingViewModel viewModel = new(
+                hotel, makeReservationNavigationService);
+            viewModel.LoadReservationCommand.Execute(null);
+            return viewModel;
+        }
+        public void UpdateReservations(IEnumerable<Reservation> reservations)
         {
             _reservations.Clear();
-            foreach (Reservation reservation in _hotel.GetAllReservation())
+            foreach (Reservation reservation in reservations)
             {
                 ReservationViewModel reservationViewModel = new(reservation);
                 _reservations.Add(reservationViewModel);

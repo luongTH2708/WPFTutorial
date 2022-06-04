@@ -12,7 +12,7 @@ using WPFTutorial.ViewModels;
 
 namespace WPFTutorial.Command
 {
-    public class MakeReservationCommand : CommandBase
+    public class MakeReservationCommand : AsyncCommandBase
     {
         private readonly MakeReservationViewModel _makeReservationViewModel;
         private readonly Hotel _hotel;
@@ -32,11 +32,10 @@ namespace WPFTutorial.Command
         {
             return !string.IsNullOrEmpty(
                 _makeReservationViewModel.Username) &&
-                _makeReservationViewModel.RoomNumber > 0 &&
                 _makeReservationViewModel.FloorNumber > 0 &&
                 base.CanExecute(parameter);
         }
-        public override void Execute(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
             Reservation reservation = new(
                 new RoomID(_makeReservationViewModel.FloorNumber, _makeReservationViewModel.RoomNumber),
@@ -46,7 +45,7 @@ namespace WPFTutorial.Command
 
             try
             {
-                _hotel.MakeResevation(reservation);
+                await _hotel.MakeResevation(reservation);
                 MessageBox.Show("Successfully reserved room.", 
                     "success", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -56,9 +55,11 @@ namespace WPFTutorial.Command
             {
                 MessageBox.Show("This room is already taken.", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
-
-                //_reservationViewReservationService.Navigate();
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to make reservation.{ex}", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
