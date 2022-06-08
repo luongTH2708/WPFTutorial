@@ -8,6 +8,7 @@ using System.Windows;
 using WPFTutorial.Exceptions;
 using WPFTutorial.Model;
 using WPFTutorial.Services;
+using WPFTutorial.Stores;
 using WPFTutorial.ViewModels;
 
 namespace WPFTutorial.Command
@@ -15,16 +16,17 @@ namespace WPFTutorial.Command
     public class MakeReservationCommand : AsyncCommandBase
     {
         private readonly MakeReservationViewModel _makeReservationViewModel;
+        private readonly HotelStore _hotelStore;
         private readonly Hotel _hotel;
         private readonly NavigationService _reservationViewReservationService;
 
         public MakeReservationCommand(MakeReservationViewModel makeReservationViewModel,
-            Hotel hotel,
+            HotelStore hotelStore,
             NavigationService reservationViewReservationService
             )
         {
             _makeReservationViewModel = makeReservationViewModel;
-            _hotel = hotel;
+            _hotelStore = hotelStore;
             _reservationViewReservationService = reservationViewReservationService;
             _makeReservationViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
@@ -45,7 +47,7 @@ namespace WPFTutorial.Command
 
             try
             {
-                await _hotel.MakeResevation(reservation);
+                await _hotelStore.MakeReservation(reservation);
                 MessageBox.Show("Successfully reserved room.", 
                     "success", MessageBoxButton.OK, MessageBoxImage.Information);
 

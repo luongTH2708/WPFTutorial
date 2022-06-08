@@ -22,6 +22,7 @@ namespace WPFTutorial
     {
         private const string CONNECTION_STRING = @"Data Source=WPFTutorial.db";
         private readonly Hotel _hotel;
+        private readonly HotelStore _hotelStore;
         private readonly NavigationStore _navigationStore;
         private readonly WPFTutorialDbContextFactory _WPFTutorialDbContextFactory;
 
@@ -36,6 +37,7 @@ namespace WPFTutorial
                 reservationCreator,
                 reservationConflictValidator);
             _hotel = new Hotel("T700", reservationBook);
+            _hotelStore = new HotelStore(_hotel);
             _navigationStore = new NavigationStore();
         }
         protected override void OnStartup(StartupEventArgs e)
@@ -56,12 +58,12 @@ namespace WPFTutorial
         }
         private MakeReservationViewModel CreateMakeReservationViewModel()
         {
-            return new MakeReservationViewModel(_hotel,
+            return new MakeReservationViewModel(_hotelStore,
                 new NavigationService(_navigationStore,CreateReservationViewModel));
         }
         private ReservationListingViewModel CreateReservationViewModel()
         {
-            return ReservationListingViewModel.LoadViewModel(_hotel,
+            return ReservationListingViewModel.LoadViewModel(_hotelStore,
                 new NavigationService(
                     _navigationStore, 
                     CreateMakeReservationViewModel));

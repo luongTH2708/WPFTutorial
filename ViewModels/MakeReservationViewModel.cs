@@ -80,10 +80,10 @@ namespace WPFTutorial.ViewModels
         }
         public ICommand SubmitCommand { get; }
         public ICommand CancelCommand { get; }
-        public MakeReservationViewModel(Hotel hotel, 
+        public MakeReservationViewModel(HotelStore hotelStore, 
             NavigationService reservationViewReservationService)
         {
-            SubmitCommand = new MakeReservationCommand(this, hotel, 
+            SubmitCommand = new MakeReservationCommand(this, hotelStore, 
                 reservationViewReservationService);
             CancelCommand = new NavigateCommand(
                 reservationViewReservationService);

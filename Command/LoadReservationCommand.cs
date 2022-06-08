@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFTutorial.Model;
+using WPFTutorial.Stores;
 using WPFTutorial.ViewModels;
 
 namespace WPFTutorial.Command
@@ -12,13 +13,13 @@ namespace WPFTutorial.Command
     public class LoadReservationCommand : AsyncCommandBase
     {
         private readonly ReservationListingViewModel _viewModel;
-        private readonly Hotel _hotel;
+        private readonly HotelStore _hotelStore;
 
         public LoadReservationCommand(
             ReservationListingViewModel viewModel, 
-            Hotel hotel)
+            HotelStore hotelStore)
         {
-            _hotel = hotel;
+            _hotelStore = hotelStore;
             _viewModel = viewModel;
         }
 
@@ -26,8 +27,8 @@ namespace WPFTutorial.Command
         {
             try
             {
-                IEnumerable<Reservation> reservations = await _hotel.GetAllReservation();
-                _viewModel.UpdateReservations(reservations);
+                await _hotelStore.Load();
+                _viewModel.UpdateReservations(_hotelStore.Reservations);
             }
             catch(Exception ex)
             {
