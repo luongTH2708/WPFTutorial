@@ -22,7 +22,7 @@ namespace WPFTutorial.Services.ReservationConflictValidator
         public async Task<Reservation> GetConflictingReservation(Reservation reservation)
         {
             using WPFTutorialDbContext context = _dbContextFactory.CreateDbContext();
-            ReservationDTO reservationDTO = await context.Reservation
+            ReservationDTO reservationDTO = await context.Reservations
                 .Where(r => r.FloorNumber == reservation.RoomID.FloorNumber)
                 .Where(r => r.RoomNumber == reservation.RoomID.RoomNumber)
                 .Where(r => r.EndTime > reservation.StartTime)

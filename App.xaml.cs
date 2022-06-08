@@ -20,7 +20,7 @@ namespace WPFTutorial
 {
     public partial class App : Application
     {
-        private const string CONNECTION_STRING = @"Data Source=D:\CODING\CSharp\tutorials\WPFTutorial\bin\Debug\net5.0-windows\WPFTutorial.db";
+        private const string CONNECTION_STRING = @"Data Source=WPFTutorial.db";
         private readonly Hotel _hotel;
         private readonly NavigationStore _navigationStore;
         private readonly WPFTutorialDbContextFactory _WPFTutorialDbContextFactory;
@@ -40,10 +40,10 @@ namespace WPFTutorial
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            using (WPFTutorialDbContext dbContext = _WPFTutorialDbContextFactory.CreateDbContext())
-            {
-                dbContext.Database.Migrate();
-            }
+            //using (WPFTutorialDbContext dbContext = _WPFTutorialDbContextFactory.CreateDbContext())
+            //{
+            //    dbContext.Database.Migrate();
+            //}
             _navigationStore.CurrentViewModel = CreateReservationViewModel();
            
             MainWindow = new MainWindow()

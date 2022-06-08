@@ -21,7 +21,7 @@ namespace WPFTutorial.Services.ReservationCreators
         {
             using WPFTutorialDbContext context = _dbContextFactory.CreateDbContext();
             ReservationDTO reservationDTO = ToReservationDTO(reservation);
-            context.Reservation.Add(reservationDTO);
+            context.Reservations.Add(reservationDTO);
             await context.SaveChangesAsync();
         }
 

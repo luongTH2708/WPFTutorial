@@ -22,7 +22,7 @@ namespace WPFTutorial.Services.ReservationProviders
         public async Task<IEnumerable<Reservation>> GetAllReservations()
         {
             using WPFTutorialDbContext context = _dbContextFactory.CreateDbContext();
-            IEnumerable<ReservationDTO> reservationDTOs = await context.Reservation.ToListAsync();
+            IEnumerable<ReservationDTO> reservationDTOs = await context.Reservations.ToListAsync();
             return reservationDTOs.Select(r => ToReservation(r));
         }
         static Reservation ToReservation(ReservationDTO dto)

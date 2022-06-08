@@ -12,6 +12,6 @@ namespace WPFTutorial.DbContexts
     {
         public WPFTutorialDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<ReservationDTO> Reservation { get; set; }
+        public DbSet<ReservationDTO> Reservations { get; set; }
     }
 }
