@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPFTutorial.Command;
-using WPFTutorial.Model;
+using WPFTutorial.Commands;
+using WPFTutorial.Models;
 using WPFTutorial.Services;
 using WPFTutorial.Stores;
 

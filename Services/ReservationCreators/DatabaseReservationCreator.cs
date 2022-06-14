@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WPFTutorial.DbContexts;
 using WPFTutorial.DTOs;
-using WPFTutorial.Model;
+using WPFTutorial.Models;
 
 namespace WPFTutorial.Services.ReservationCreators
 {

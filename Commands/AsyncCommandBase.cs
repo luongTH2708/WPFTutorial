@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFTutorial.Command
+namespace WPFTutorial.Commands
 {
     public abstract class AsyncCommandBase : CommandBase
     {

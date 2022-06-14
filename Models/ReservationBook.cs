@@ -9,7 +9,7 @@ using WPFTutorial.Services.ReservationConflictValidator;
 using WPFTutorial.Services.ReservationCreators;
 using WPFTutorial.Services.ReservationProviders;
 
-namespace WPFTutorial.Model
+namespace WPFTutorial.Models
 {
     public class ReservationBook
     {

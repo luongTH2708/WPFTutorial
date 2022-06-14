@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFTutorial.Model
+namespace WPFTutorial.Models
 {
     public class RoomID
     {

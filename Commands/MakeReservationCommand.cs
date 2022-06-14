@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFTutorial.Exceptions;
-using WPFTutorial.Model;
+using WPFTutorial.Models;
 using WPFTutorial.Services;
 using WPFTutorial.Stores;
 using WPFTutorial.ViewModels;
 
-namespace WPFTutorial.Command
+namespace WPFTutorial.Commands
 {
     public class MakeReservationCommand : AsyncCommandBase
     {

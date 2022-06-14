@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFTutorial.DbContexts;
-using WPFTutorial.Model;
+using WPFTutorial.Models;
 using WPFTutorial.Services;
 using WPFTutorial.Services.ReservationConflictValidator;
 using WPFTutorial.Services.ReservationCreators;

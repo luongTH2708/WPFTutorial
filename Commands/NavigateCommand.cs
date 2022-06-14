@@ -7,7 +7,7 @@ using WPFTutorial.Services;
 using WPFTutorial.Stores;
 using WPFTutorial.ViewModels;
 
-namespace WPFTutorial.Command
+namespace WPFTutorial.Commands
 {
     public class NavigateCommand : CommandBase
     {
